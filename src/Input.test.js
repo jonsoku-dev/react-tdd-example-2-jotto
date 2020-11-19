@@ -3,6 +3,7 @@ import { shallow } from "enzyme";
 
 import { findByTestAttr, storeFactory } from "../test/testUtils";
 import Input from "./Input";
+import { guessWord } from "./actions";
 
 /**
  * Factory function to create a ShallowWrapper for the Input component.
@@ -58,4 +59,18 @@ describe("render", () => {
     });
   });
 });
-describe("update state", () => {});
+describe("redux props", () => {
+  // simple prop test
+  test("has success piece of state as prop", () => {
+    const success = true;
+    const wrapper = setup({ success });
+    const successProp = wrapper.instance().props.success;
+    expect(successProp).toBe(success);
+  });
+  // action creator
+  test("`guessWord` action creator is a function prop", () => {
+    const wrapper = setup();
+    const guessWordProp = wrapper.instance().props.guessWord;
+    expect(guessWordProp).toBeInstanceOf(Function);
+  });
+});
