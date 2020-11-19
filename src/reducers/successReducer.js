@@ -5,7 +5,7 @@ const successReducer = (state = false, action) => {
     case actionTypes.CORRECT_GUESS:
       return true;
     default:
-      return false;
+      return state;
   }
 };
 

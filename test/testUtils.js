@@ -1,5 +1,5 @@
 import checkPropTypes from "check-prop-types";
-import {createStore} from "redux";
+import { createStore } from "redux";
 
 import rootReducer from "../src/reducers";
 
