@@ -6,8 +6,10 @@ import Input from "./Input";
 
 const setup = (initialState = {}) => {
   const store = storeFactory(initialState);
-  const wrapper = shallow(<Input store={store} />);
-  console.log(wrapper.debug());
+  // shallow().dive() 얕은 랜더에서 한단계 아래로 가는법 dive().dive().dive()..... 이어줄 수 있다.
+  return shallow(<Input store={store} />)
+    .dive()
+    .dive();
 };
 
 setup();
