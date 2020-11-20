@@ -16,16 +16,10 @@ export class UnConnectApp extends Component {
     return (
       <div className="container">
         <h1>Jotto</h1>
-        <Congrats success={true} />
+        <div>The secret word is {this.props.secretWord}</div>
+        <Congrats success={this.props.success} />
         <Input />
-        <GuessedWords
-          guessedWords={[
-            {
-              guessedWord: "train",
-              letterMatchCount: 3,
-            },
-          ]}
-        />
+        <GuessedWords guessedWords={this.props.guessedWords} />
       </div>
     );
   }
