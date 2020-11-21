@@ -1,15 +1,33 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { mount } from "enzyme";
 
 import { findByTestAttr, checkProps } from "../test/testUtils";
 import Congrats from "./Congrats";
+import LanguageContext from "./contexts/languageContext";
 
 const defaultProps = { success: false };
 
-const setup = (props = {}) => {
-  const setupProps = { ...defaultProps, ...props };
-  return shallow(<Congrats {...setupProps} />);
+const setup = ({ success, language }) => {
+  language = language || "en";
+  success = success || false;
+
+  return mount(
+    <LanguageContext.Provider value={language}>
+      <Congrats success={success} />
+    </LanguageContext.Provider>
+  );
 };
+
+describe('language picker', () => {
+  test('correctly renders congrats string in English by default', () => {
+    const wrapper = setup({ success: true });
+    expect(wrapper.text()).toBe('Congratulations! You guessed the word!');
+  });
+  test('correctly renders congrats string in emoji', () => {
+    const wrapper = setup({ success: true, language: "emoji" });
+    expect(wrapper.text()).toBe('🎯🎉');
+  });
+});
 
 test(`에러 없는 랜더링`, () => {
   const wrapper = setup({ success: false });

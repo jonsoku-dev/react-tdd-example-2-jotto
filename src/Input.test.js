@@ -1,10 +1,17 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { mount } from "enzyme";
 import { checkProps, findByTestAttr } from "../test/testUtils";
 import Input from "./Input";
+import LanguageContext from "./contexts/languageContext";
 
-const setup = ({ secretWord = "party" }) => {
-  return shallow(<Input secretWord={secretWord} />);
+const setup = ({ language, secretWord = "party" }) => {
+  language = language || "en";
+  secretWord = secretWord || "party";
+  return mount(
+    <LanguageContext.Provider value={language}>
+      <Input secretWord={secretWord} />
+    </LanguageContext.Provider>
+  );
 };
 
 test("인풋 컴포넌트가 제대로 랜더링이 되는가?", () => {
